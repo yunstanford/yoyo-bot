@@ -8,26 +8,32 @@ LANGUAGE_MODEL = "en_core_web_md"
 
 
 def main(build):
+    build.packages.install("numpy", version="==1.13.0")
+    build.packages.install("spacy")
+    build.packages.install("coloredlogs")
+    build.packages.install("scipy")
+    build.packages.install("scikit-learn")
+    build.packages.install("sklearn_crfsuite")
     build.packages.install(".", develop=True)
     build.executables.run([
         sys.executable, "-m", "spacy", "download", LANGUAGE_MODEL,
-    ])
-    build.executables.run([
-        sys.executable, "-m", "spacy", "link", LANGUAGE_MODEL,
     ])
 
 
 def train_model(build):
     build.executables.run([
         sys.executable, "-m", "rasa_nlu.train",
-        "--config" os.path.join(build.root, "config", "config_spacy.yml"),
+        "--config", os.path.join(build.root, "config", "config_spacy.yml"),
         "--data", os.path.join(build.root, "data", "training-set.json"),
         "--path", os.path.join(build.root, "projects"),
     ])
 
 
 def dev(build):
-    pass
+    build.executables.run([
+        sys.executable, "-m", "rasa_nlu.server",
+        "--path", os.path.join(build.root, "projects"),
+    ])
 
 
 @task_requires("main")
