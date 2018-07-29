@@ -18,7 +18,12 @@ def main(build):
 
 
 def train_model(build):
-    pass
+    build.executables.run([
+        sys.executable, "-m", "rasa_nlu.train",
+        "--config" os.path.join(build.root, "config", "config_spacy.yml"),
+        "--data", os.path.join(build.root, "data", "training-set.json"),
+        "--path", os.path.join(build.root, "projects"),
+    ])
 
 
 def dev(build):
