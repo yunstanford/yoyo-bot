@@ -7,8 +7,10 @@ base = os.path.dirname(os.path.abspath(__file__))
 README_PATH = os.path.join(base, "README.rst")
 
 install_requires = [
-    "rasa_nlu",
+    "rasa_nlu ==0.12.3",
     "spacy",
+    "gunicorn",
+    "flask",
 ]
 
 tests_require = []

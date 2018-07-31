@@ -36,6 +36,13 @@ def dev(build):
     ])
 
 
+def run_app(build):
+    build.executables.run([
+        sys.executable,
+        os.path.join(build.root, "yoyo_bot", "app.py"),
+    ])
+
+
 @task_requires("main")
 def test(build):
     build.packages.install("pytest")
