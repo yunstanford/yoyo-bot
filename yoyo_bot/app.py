@@ -1,14 +1,27 @@
 # Ref: https://github.com/bhavaniravi/rasa-site-bot
 from flask import Flask
-from flask import render_template,jsonify,request
+from flask import render_template, jsonify, request
 import requests
-# from models import *
-from engine import *
 import random
+from engine import (
+    intent_response_dict, gstinfo_response_dict,
+    gst_query_value_dict, gst_info, gst_query,
+    handle_greet, handle_affirm, handle_restaurant_search,
+    handle_goodbye,
+)
+
+
+HANDLES = {
+    "greet": handle_greet,
+    "affirm": handle_affirm,
+    "restaurant_search": handle_restaurant_search,
+    "goodbye": handle_goodbye,
+}
 
 
 app = Flask(__name__)
 app.secret_key = '12345'
+
 
 @app.route('/')
 def hello_world():

@@ -1,3 +1,5 @@
+import random
+
 
 ##dict of response for each type of intent
 intent_response_dict = {
@@ -39,3 +41,52 @@ def gst_query(entities):
 
         return gstinfo_response_dict[entities[0]]
     return "Sorry.." + gstinfo_response_dict["faq_link"]
+
+
+##################
+# greetings DATA #
+##################
+GREETINGS_DATA = {
+    "greet": ["Hey", "Hello", "Hi"],
+}
+
+##################
+# affirms DATA   #
+##################
+AFFIRMS_DATA = {
+    "affirm": ["Cool", "I know you would like it",]
+}
+
+##########################
+# restaurant_search DATA #
+##########################
+RESTAURANT_SEARCH_DATA = {
+    
+}
+
+##################
+# goodbye's DATA #
+##################
+GOODBYE_SEARCH_DATA = {
+    "goodbye": ["Bye", "It was nice talking to you", "See you", "ttyl"],
+}
+
+
+# Not Depend on entities
+def handle_greet(entities):
+    return random.choice(GREETINGS_DATA["greet"])
+
+
+# Not Depend on entities
+def handle_affirm(entities):
+    return random.choice(AFFIRMS_DATA["affirm"])
+
+
+# Not Depend on entities
+def handle_goodbye(entities):
+    return random.choice(GOODBYE_SEARCH_DATA["goodbye"])
+
+
+def handle_restaurant_search(entities):
+    pass
+
